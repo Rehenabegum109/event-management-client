@@ -8,7 +8,7 @@ export default function ItemsPage() {
   const [search, setSearch] = useState("");
 
   useEffect(() => {
-    fetch("http://localhost:5000/events")
+    fetch("https://event-management-server-9qykegjhv-rehenas-projects-7754e927.vercel.app/events")
       .then(res => res.json())
       .then(data => setEvents(data));
   }, []);
@@ -18,7 +18,7 @@ export default function ItemsPage() {
   );
 
   return (
-    <div className="container mx-auto px-4 py-10">
+    <div className="container bg-gray-100 mx-auto px-4 py-10">
 
       {/* Page Title */}
       <h1 className="text-4xl font-bold mb-2">All Events</h1>

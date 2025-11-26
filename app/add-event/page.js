@@ -7,7 +7,7 @@ import 'react-toastify/dist/ReactToastify.css'
 export default function AddEventPage() {
   const [form, setForm] = useState({
     title: '',
-    shortDescription: '',
+    
     description: '',
     price: '',
     date: '',
@@ -21,7 +21,7 @@ export default function AddEventPage() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      const res = await fetch('http://localhost:5000/events', {
+      const res = await fetch('https://event-management-server-9qykegjhv-rehenas-projects-7754e927.vercel.app/events', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(form),
@@ -37,12 +37,12 @@ export default function AddEventPage() {
   }
 
   return (
-    <div className="max-w-2xl mx-auto p-6">
+    <div className="max-w-2xl bg-gray-50  mx-auto p-6">
       <ToastContainer position="top-right" />
       <h1 className="text-3xl font-bold mb-6">Add New Event</h1>
       <form onSubmit={handleSubmit} className="space-y-4">
         <input type="text" name="title" placeholder="Title" value={form.title} onChange={handleChange} required className="w-full p-2 border rounded" />
-        <input type="text" name="shortDescription" placeholder="Short Description" value={form.shortDescription} onChange={handleChange} required className="w-full p-2 border rounded" />
+        
         <textarea name="description" placeholder="Full Description" value={form.description} onChange={handleChange} required className="w-full p-2 border rounded" />
         <input type="number" name="price" placeholder="Price" value={form.price} onChange={handleChange} required className="w-full p-2 border rounded" />
         <input type="date" name="date" value={form.date} onChange={handleChange} required className="w-full p-2 border rounded" />

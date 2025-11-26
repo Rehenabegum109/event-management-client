@@ -1,8 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
-// import { db } from "../../../lib/firebase";
-// import EventForm from "../../../components/EventForm";
 import { useRouter } from "next/navigation";
 import { db } from "@/firebase/firebase.init";
 import EventForm from "@/component/Testonials";
