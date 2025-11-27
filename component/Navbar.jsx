@@ -91,7 +91,7 @@ export default function Navbar() {
       {menuOpen && (
         <div className="md:hidden bg-white border-t shadow">
           <Link href="/" className="block px-4 py-3 border-b hover:bg-gray-100">Home</Link>
-          <Link href="/products" className="block px-4 py-3 border-b hover:bg-gray-100">Products</Link>
+          <Link href="/event" className="block px-4 py-3 border-b hover:bg-gray-100">Events</Link>
           <Link href="/about" className="block px-4 py-3 border-b hover:bg-gray-100">About</Link>
           <Link href="/contact" className="block px-4 py-3 border-b hover:bg-gray-100">Contact</Link>
 
