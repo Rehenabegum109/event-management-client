@@ -16,7 +16,7 @@ export default function ManageProducts() {
 
   // Fetch products from backend
   useEffect(() => {
-    fetch("http://localhost:5000/events")
+    fetch("https://event-management-server-psi.vercel.app/events")
       .then(res => res.json())
       .then(data => {
         setProducts(data)
@@ -28,7 +28,7 @@ export default function ManageProducts() {
   // Delete product
   const handleDelete = (id) => {
     if (!confirm("Sure to delete?")) return
-    fetch(`http://localhost:5000/events/${id}`, { method: "DELETE" })
+    fetch(`https://event-management-server-psi.vercel.app/events/${id}`, { method: "DELETE" })
       .then(res => res.json())
       .then(() => setProducts(products.filter(p => (p._id ?? p.id) !== id)))
       .catch(err => console.error("Delete error:", err))
@@ -58,7 +58,7 @@ export default function ManageProducts() {
     const productId = editingProduct._id ?? editingProduct.id
     if (!productId) return alert("Product ID not found!")
 
-    fetch(`https://event-management-server-9qykegjhv-rehenas-projects-7754e927.vercel.app/events/${productId}`, {
+    fetch(`https://event-management-server-psi.vercel.app/events/${productId}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(formData)

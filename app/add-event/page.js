@@ -21,7 +21,7 @@ export default function AddEventPage() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      const res = await fetch('https://event-management-server-9qykegjhv-rehenas-projects-7754e927.vercel.app/events', {
+      const res = await fetch('https://event-management-server-psi.vercel.app/events', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(form),

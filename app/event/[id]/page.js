@@ -7,7 +7,7 @@ export default function EventDetails() {
   const [event, setEvent] = useState(null);
 
   useEffect(() => {
-    fetch(`https://event-management-server-9qykegjhv-rehenas-projects-7754e927.vercel.app/events/${params.id}`)
+    fetch(`https://event-management-server-psi.vercel.app/events/${params.id}`)
       .then(res => res.json())
       .then(data => setEvent(data))
       .catch(err => console.error(err));

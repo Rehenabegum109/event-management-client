@@ -3,18 +3,40 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
+// ⭐ detectCategory function
+const detectCategory = (title) => {
+  if (!title) return "General";
+  const lower = title.toLowerCase();
+  if (lower.includes("wedding")) return "Wedding";
+  if (lower.includes("tech")) return "Corporate";
+  if (lower.includes("corporate")) return "Corporate";
+  if (lower.includes("birthday")) return "Birthday";
+  if (lower.includes("music")) return "Music";
+  return "General";
+};
+
 export default function ItemsPage() {
   const [events, setEvents] = useState([]);
   const [search, setSearch] = useState("");
+  const [category, setCategory] = useState(""); // dropdown value
 
+  // ⭐ Fetch events + auto category
   useEffect(() => {
-    fetch("https://event-management-server-9qykegjhv-rehenas-projects-7754e927.vercel.app/events")
+    fetch("https://event-management-server-psi.vercel.app/events")
       .then(res => res.json())
-      .then(data => setEvents(data));
+      .then(data => {
+        const updated = data.map(event => ({
+          ...event,
+          category: detectCategory(event.title) // auto assign category
+        }));
+        setEvents(updated);
+      });
   }, []);
 
+  // ⭐ Filter by search + category
   const filtered = events.filter(event =>
-    event.title.toLowerCase().includes(search.toLowerCase())
+    event.title.toLowerCase().includes(search.toLowerCase()) &&
+    (category === "" || event.category === category)
   );
 
   return (
@@ -28,6 +50,8 @@ export default function ItemsPage() {
 
       {/* Search + Category */}
       <div className="flex gap-4 mb-6">
+        
+        {/* Search */}
         <input
           type="text"
           placeholder="Search events..."
@@ -35,12 +59,17 @@ export default function ItemsPage() {
           onChange={(e) => setSearch(e.target.value)}
         />
 
-        <select className="border p-2 rounded">
-          <option disabled selected>Category</option>
-          <option>Wedding</option>
-          <option>Corporate</option>
-          <option>Birthday</option>
-          <option>Music</option>
+        {/* Category Dropdown */}
+        <select
+          className="border p-2 rounded"
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
+        >
+          <option value="">Select Category</option>
+          <option value="Wedding">Wedding</option>
+          <option value="Corporate">Corporate</option>
+          <option value="Birthday">Birthday</option>
+          <option value="Music">Music</option>
         </select>
       </div>
 
@@ -51,7 +80,7 @@ export default function ItemsPage() {
             <img
               src={event.image}
               className="h-40 w-full object-cover rounded"
-              alt=""
+              alt={event.title}
             />
             <h2 className="text-xl font-semibold mt-3">
               {event.title}
@@ -62,11 +91,12 @@ export default function ItemsPage() {
             <p className="font-semibold text-blue-600 mt-2">
               Price: ${event.price}
             </p>
-<Link href={`/event/${event._id}`}>
-  <button className="mt-3 bg-blue-500 text-white p-2 rounded w-full">
-    Details
-  </button>
-</Link>
+
+            <Link href={`/event/${event._id}`}>
+              <button className="mt-3 bg-blue-500 text-white p-2 rounded w-full">
+                Details
+              </button>
+            </Link>
           </div>
         ))}
       </div>
