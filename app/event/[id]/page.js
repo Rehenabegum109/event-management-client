@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 
 export default function EventDetails() {
-  const params = useParams();  // params.id
+  const params = useParams();  
   const [event, setEvent] = useState(null);
 
   useEffect(() => {
